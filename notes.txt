@@ -1,0 +1,79 @@
+ENV variable
+
+api/v1
+
+
+
+//Analyzing the eshop databse for creating schemas
+49:05 in the video
+
+
+
+STEPS WHEN CREATING EXPRESS ROUTES:
+
+1 - Create the Mongoose Schema First via models folder.
+Don't forget to export like this:
+exports.Category = mongoose.model('Category', categorySchema);
+
+2 - Create the routes on the routes folder.
+Import express, the routes and the Schema fr fr
+  const express = require('express');
+  const router = express.Router();
+  const { Category } = require('../models/order');
+
+DONT FORGET THE: module.exports = router;
+
+3 - in the app.js or the main home file...
+
+a - require mongoose
+
+//routes
+b - create the routes by exporting from the routes you made
+const categoriesRoutes = require('./routes/categories');
+const productsRoutes = require('./routes/products');
+const usersRoutes = require('./routes/users');
+const ordersRoutes = require('./routes/orders');
+
+c - Implement an app.use with the actual route link - so in the API controller, most routes starts with /
+app.use(`${api}/categories`, categoriesRoutes);  //put the "home" link for each route and use the variable routes created
+app.use(`${api}/products`, productsRoutes);
+app.use(`${api}/users`, usersRoutes);
+app.use(`${api}/orders`, ordersRoutes);
+
+d - create the controllers, the controller is the function that we passed in the routers/routes files
+they are the main function of the API
+d - create the API
+
+
+---- API ---- 
+
+1 - It all starts with Schema - it defines what the shape of the database would look like
+
+
+
+
+--AUTHENTICATION--
+
+see auth image
+
+
+1 - server api for creating users
+2 - hash the password so it wont be saved as the actual password - use bcrypt
+3 - LOGIN A USER REST API AND CREATE A TOKEN
+4 - how can we make api safe so anyone without token cant use the server pi (authorization) (expressjwt)
+5 - api error handling - helpers -> error-handler.js
+6 - excluding rest api routes from authentication  - helpers - > jwt.js
+7 - add more secret user information to token
+8 - add isRevoke function to not have access if isAdmin = false and have access if isAdmin = true
+
+
+--ORDERS API---
+
+1 - Order - refs OrderItem and Order Item refs Product Schema
+2 - API that accepts orders - focus on creating a new orderId (creating new orders API)
+3 - get all orders
+4 - update order status
+5 - delete order and orderItemsId
+6 - calculate total price of all orderItems, not good at calculating in the front end, susceptible for change and hacking
+
+
